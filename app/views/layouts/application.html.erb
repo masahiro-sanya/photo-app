@@ -23,6 +23,26 @@
   </head>
 
   <body>
+    <% if flash[:notice].present? %>
+      <div data-controller="flash-toast" data-flash-toast-timeout-value="3500" class="toast-wrap">
+        <div data-flash-toast-target="toast" class="toast">
+          <span style="font-weight:600;">成功</span>
+          <span style="flex:1;"><%= flash[:notice] %></span>
+          <button type="button" aria-label="閉じる" data-action="click->flash-toast#hide" class="toast__close">×</button>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:alert].present? %>
+      <div data-controller="flash-toast" data-flash-toast-timeout-value="5000" class="toast-wrap">
+        <div data-flash-toast-target="toast" class="toast toast--error">
+          <span style="font-weight:600;">エラー</span>
+          <span style="flex:1;"><%= flash[:alert] %></span>
+          <button type="button" aria-label="閉じる" data-action="click->flash-toast#hide" class="toast__close">×</button>
+        </div>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

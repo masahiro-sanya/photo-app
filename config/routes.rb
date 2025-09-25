@@ -10,5 +10,18 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root to: "sessions#new"
+
+  get "/login", to: "sessions#new", as: :login
+  resources :sessions, only: [:new, :create]
+  delete "/logout", to: "sessions#destroy", as: :logout
+
+  resources :photos, only: [:index, :new, :create] do
+    member do
+      post :tweet
+    end
+  end
+
+  # OAuth callback endpoint (Authorization Code Flow)
+  get "/oauth/callback", to: "o_auth#callback", as: :oauth_callback
 end

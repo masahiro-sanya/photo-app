@@ -1,0 +1,39 @@
+/* 汎用レイアウト */
+.container { max-width: 900px; margin: 2rem auto; }
+.container--md { max-width: 720px; }
+.container--sm { max-width: 420px; }
+
+.mb-1 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 1rem; }
+.ml-1 { margin-left: 1rem; }
+.ml-auto { margin-left: auto; }
+.muted { color: #666; font-size: 12px; }
+.w-100 { width: 100%; }
+
+/* ボタン（最低限） */
+.btn { display: inline-block; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; text-decoration: none; }
+
+/* フラッシュ */
+.flash.alert { color: #b00020; margin: 1rem 0; }
+
+/* グリッド/カード */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; }
+.card .title { font-weight: 600; margin-bottom: 8px; }
+.thumb { overflow: hidden; }
+.thumb img { width: 100%; height: auto; object-fit: cover; }
+
+/* アクション行 */
+.actions { display: flex; gap: 8px; align-items: center; }
+
+/* バッジ */
+.badge { padding: 2px 8px; border-radius: 12px; font-size: 12px; }
+.badge--ok { background: #e8f5e9; color: #1b5e20; }
+.badge--warn { background: #fff3e0; color: #e65100; }
+.note { color: #666; font-size: 12px; margin-left: 8px; }
+
+/* トースト */
+.toast-wrap { position: fixed; top: 16px; right: 16px; z-index: 1100; }
+.toast { background: #10b981; color: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.2); transition: all .2s ease; transform: translateY(-10px); opacity: 0; min-width: 240px; display: flex; align-items: center; gap: 8px; }
+.toast--error { background: #ef4444; }
+.toast__close { background: transparent; border: none; color: #fff; font-size: 16px; line-height: 1; cursor: pointer; }

@@ -1,0 +1,32 @@
+<div class="container container--md">
+  <h1>写真アップロード</h1>
+
+  <% if flash[:alert].present? || @photo&.errors&.any? %>
+    <div class="flash alert" style="color:#b00020; margin: 1rem 0;">
+      <ul>
+        <% (@photo.errors.full_messages.presence || [flash[:alert]]).each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @photo, url: photos_path, html: { multipart: true } do |f| %>
+    <div class="field mb-1">
+      <%= f.label :title, "タイトル" %><br>
+      <%= f.text_field :title, maxlength: 30, required: true, class: "w-100" %>
+      <div class="muted">30文字まで</div>
+    </div>
+    <div class="field mb-1">
+      <%= f.label :image, "画像ファイル" %><br>
+      <%= f.file_field :image, accept: "image/*", required: true %>
+    </div>
+    <div class="actions" style="display:flex; gap: 8px; align-items:center;">
+      <%= f.submit "アップロード" %>
+      <%= link_to "キャンセルして一覧へ", photos_path %>
+      <span class="ml-auto">
+        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+      </span>
+    </div>
+  <% end %>
+</div>

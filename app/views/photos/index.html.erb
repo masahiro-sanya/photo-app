@@ -1,0 +1,44 @@
+<%# フラッシュは共通トースト（layouts/application）で表示 %>
+
+<div class="container">
+  <h1>写真一覧</h1>
+
+  <p class="mb-1">
+    <%= link_to "MyTweetApp と連携する", oauth_authorize_url, rel: "noopener", target: "_blank" %>
+    <span class="note">（認可ページを新規タブで開きます）</span>
+    <% if oauth_connected? %>
+      <span class="badge badge--ok ml-1">連携済み</span>
+    <% else %>
+      <span class="badge badge--warn ml-1">未連携</span>
+    <% end %>
+  </p>
+
+  <p class="mb-1">
+    <%= link_to "写真をアップロード", new_photo_path, class: "btn" %>
+    <span class="ml-1">
+      <%= button_to "ログアウト", logout_path, method: :delete %>
+    </span>
+  </p>
+
+  <% if @photos.blank? %>
+    <p>まだ写真がありません。</p>
+  <% else %>
+    <div class="grid">
+      <% @photos.each do |photo| %>
+        <div class="card">
+          <div class="title"><%= photo.title %></div>
+          <% if photo.image.attached? %>
+            <div class="thumb">
+              <%= image_tag photo.image %>
+            </div>
+          <% end %>
+          <% if oauth_connected? %>
+            <div class="mb-1 mt-1">
+              <%= button_to "ツイートする", tweet_photo_path(photo), method: :post %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

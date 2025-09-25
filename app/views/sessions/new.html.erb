@@ -1,0 +1,27 @@
+<div class="container container--sm" style="margin-top: 3rem;">
+  <h1>ログイン</h1>
+
+  <% if @errors.present? || flash[:alert].present? %>
+    <div class="flash alert" style="color:#b00020; margin: 1rem 0;">
+      <ul>
+        <% (@errors.presence || [flash[:alert]]).each do |err| %>
+          <li><%= err %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with scope: :session, url: sessions_path, method: :post do |f| %>
+    <div class="field mb-1">
+      <%= f.label :user_id, "ユーザーID" %><br>
+      <%= f.text_field :user_id, autofocus: true, required: true %>
+    </div>
+    <div class="field mb-1">
+      <%= f.label :password, "パスワード" %><br>
+      <%= f.password_field :password, required: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit "ログイン" %>
+    </div>
+  <% end %>
+</div>
